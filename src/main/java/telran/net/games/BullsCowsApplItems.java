@@ -76,12 +76,12 @@ public class BullsCowsApplItems {
         }
 
         gamesWithGamer.forEach(gameId -> {
-            int nDigits = bullsCows.getNumberOfDigits(gameId);  // Получаем количество цифр для каждой игры
+            int nDigits = bullsCows.getNumberOfDigits(gameId);
             io.writeLine("Game ID: " + gameId + " (" + nDigits + " digits)");
         });
         
         currentGameId = io.readLong("Select game ID to start:", "Invalid game ID");
-        currentNDigits = bullsCows.getNumberOfDigits(currentGameId);  // Получаем количество цифр для выбранной игры
+        currentNDigits = bullsCows.getNumberOfDigits(currentGameId); 
 
         bullsCows.startGame(currentGameId);
         io.writeLine("Game started: " + currentGameId);
@@ -89,7 +89,7 @@ public class BullsCowsApplItems {
         GuessMenu(io);
     }
 
-    // 5. Continue game menu
+   
     static void continueGameMenu(InputOutput io) {
         List<Long> startedGames = bullsCows.getStartedGamesWithGamer(currentUsername);
         if (startedGames.isEmpty()) {
