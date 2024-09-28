@@ -134,5 +134,39 @@ public String loginGamer(String username) {
 	    
 	    return response; 
 }
+@Override
+public List<Long> getNotStartedGamesWithGamer(String username) {
+    String response = tcpClient.sendAndReceive(new Request("getNotStartedGamesWithGamer", username));
+    if (response.startsWith("Exception:")) {
+        throw new RuntimeException(response.substring("Exception:".length()).trim());
+    }
+    return Arrays.stream(response.split(";")).map(Long::parseLong).toList();
+}
 
+@Override
+public List<Long> getNotStartedGamesWithNoGamer(String username) {
+    String response = tcpClient.sendAndReceive(new Request("getNotStartedGamesWithNoGamer", username));
+    if (response.startsWith("Exception:")) {
+        throw new RuntimeException(response.substring("Exception:".length()).trim());
+    }
+    return Arrays.stream(response.split(";")).map(Long::parseLong).toList();
+}
+
+@Override
+public List<Long> getStartedGamesWithGamer(String username) {
+    String response = tcpClient.sendAndReceive(new Request("getStartedGamesWithGamer", username));
+    if (response.startsWith("Exception:")) {
+        throw new RuntimeException(response.substring("Exception:".length()).trim());
+    }
+    return Arrays.stream(response.split(";")).map(Long::parseLong).toList();
+}
+
+@Override
+public int getNumberOfDigits(long gameId) {
+    String response = tcpClient.sendAndReceive(new Request("getNumberOfDigits", String.valueOf(gameId)));
+    if (response.startsWith("Exception:")) {
+        throw new RuntimeException(response.substring("Exception:".length()).trim());
+    }
+    return Integer.parseInt(response);
+}
 }
