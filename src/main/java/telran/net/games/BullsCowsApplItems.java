@@ -104,6 +104,8 @@ public class BullsCowsApplItems {
 
         currentGameId = io.readLong("Select game ID to continue:", "Invalid game ID");
         currentNDigits = bullsCows.getNumberOfDigits(currentGameId); 
+        
+        bullsCows.startGame(currentGameId);
 
         GuessMenu(io);
     }
@@ -127,6 +129,7 @@ public class BullsCowsApplItems {
         bullsCows.gamerJoinGame(currentGameId, currentUsername);
         io.writeLine("You joined game: " + currentGameId + " with " + currentNDigits + " digits.");
 
+        bullsCows.startGame(currentGameId);
         GuessMenu(io);
     }
 
@@ -151,7 +154,8 @@ public class BullsCowsApplItems {
         moveResults.forEach(io::writeLine);
        
         if (bullsCows.gameOver(currentGameId)) {
-            io.writeLine("Congratulations! You won the game.");
+            io.writeLine("Congratulations! You won the game. Press 5 for exit! ");
+            
         }
     }
 }
